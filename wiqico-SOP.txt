@@ -1,0 +1,139 @@
+alur transaksi wiqico :
+
+divisi Gestun Register >>
+	- ID
+	- First Name
+	- Last Name
+	- Birth Date
+	- Email
+	- Phone
+	- Address
+	- City
+	- Identity Number
+	- KTP // Identity Card // encrypted // Image
+	- Payment_bank
+	- Bank_account
+	- Verification_status
+	- Member_status
+
+	transaction >>
+	- ID
+	- Transaction_Code // encrypted
+	- Transaction_detail
+	- Items_id
+	- Price_amount
+	- Register_id
+	- Status_transaction
+	
+	transaction_detail >>
+	- ID
+	- Transaction_id
+	- Masked_card
+	- Transaction_time
+	- Transaction_status
+	- Fraud_status
+	- Approval_code
+	- Signature_key
+	- Payment_type
+	- Bank_name
+	- Gross_amount
+	
+	detail status transaction from veritrans :
+	- capture = Transaction success and ready for settlement
+	- cancel = Transaction not success and not proceed to settlement
+	- settlement = funds ready to moved merchants
+	- deny = transaction denied by bank or veritrans, Fraud detection system
+	
+	detail fraud transaction from veritrans :
+	- accept = transaction passes Veritrans Fraud Detection System
+	- challenge = transaction is suspicious, and manually accepts
+	- deny = tansaction denied by veritrans, Fraud detection system
+	
+divisi Rekber Transaction>>
+	- ID
+	- Transaction_id
+	- Register_ID_buyer
+	- Register_ID_seller
+	- Guest_ID_seller
+	- Thread_link //seller link
+	- Transaction_type
+	- Transaction_id_Details
+	- Products_id
+	- Total_amount
+	- Delivery_status
+	- Payment_status
+	- Transaction_status
+	
+	products_details>>
+	- ID
+	- Products_name
+	- Categories_products
+	- Price_products
+	- Delivery _id // Di isi oleh Seller
+	
+	Guest Seller ID >>
+	- ID
+	- First Name
+	- Last Name
+	- Phone
+	- Payment_bank
+	- Bank_account
+	- Verification_status
+	
+	COD >>
+	- ID
+	- Parameter_details
+	- Seller_id
+	- Status_delivery
+	- Delivery_id // Di isi oleh wiqico
+	- Verification_status
+	
+alur kerja gestun:
+ - pelanggan melakukan pendaftaran di website gestun.wiqi.co, lalu setelah itu menunggu dari tim wiqico melakukan verifikasi data +- 5 Menit
+ - jika verifikasi sukses maka pelanggan dapat melakukan login untuk transaksi
+ - transaksi dilakukan melalui login area di gestun.wiqi.co, dan pelanggan memilih berapa uang yang akan di gestun, setelah itu pelanggan akan di redirect
+ ke halaman store.wiqi.co, lalu di redirect kembali ke halaman payment veritrans.
+ - jika transaksi sukses pelanggan akan di direct ke halaman store.wiqi.co/result/success/01
+ - Setelah Payment status di nyatakan berhasil, maka tim wiqi.co akan melakukan transfer uang ke rekening yang terdaftar di akun pelanggan.
+ 
+alur kerja rekber:
+ - pelanggan melakukan pendaftaran di website rekber.wiqi.co, setelah itu tim wiqico akan melakukan verifikasi data +- 5 Menit
+ - jika verifikasi sukses maka pelanggan dapat melakukan login untuk transaksi
+ - pelanggan akan di minta mengisi link jualan seller (kaskus/olx/atau forum lainnya), dan pelanggan memasukan jenis barang apa yang di beli dan harganya, ID seller, jika seller belum pernah bertransaksi di wiqico, maka pelanggan
+ bisa membuat ID guest seller, dengan mengisi nama seller, nomor telepon, nomor rekening seller, setelah itu pelanggan akan di arahkan ke halaman pembayaran
+ dengan rincian pembayaran (harga barang+additional price+biaya rekber), setelah itu tim wiqico akan melakukan konfirmasi kepada seller untuk segera mengirimkan
+ barang tsb.
+ - setelah proses pengiriman seller di harapkan melakukan pengisian form delivery_number di halaman rekber.wiqi.co/confirmation/resi/[id_transaction]/[security_token]
+ - buyer harus segera memberikan konfirmasi setelah barang di terima / kami akan memberikan konfirmasi jika kami melihat delivery status telah terkirim
+ - jika dalam 3 hari buyer tidak memberikan konfirmasi, maka tim wiqico berhak secara sepihak meneruskan pembayaran ke pihak seller, dan buyer tidak berhak
+ menuntut kami dengan alasan apapun.
+
+alur kerja COD:
+ - pelanggan melakukan login ke halaman rekber.wiqi.co, lalu memilih metode COD (hanya berlaku untuk daerah bekasi dan Jakarta)
+ - setelah itu pelanggan di minta untuk melakukan pengisian, link thread seller, harga barang, lalu parameter pengecekan barang yang harus dilakukan oleh kurir kami
+ - setelah itu pelanggan di haruskan melakukan pembayaran dengan rincian pembayaran(Harga barang+biaya pengiriman+biaya COD), setelah pembayaran sukses maka tim wiqico
+ akan mengkonfirmasi kapan kurir kami akan melakukan COD dengan seller, kurir kami akan melakukan pengecekan sesuai dengan parameter yang pelanggan tulis
+ jika semua sesuai maka kurir kami akan melakukan pembayaran ke seller, dan barang akan kami kirimkan ke alamat pelanggan.
+
+ Biaya transaksi Rekber :
+	- <= 1.000.000 = 3000
+	- 1.000.000 - 5.000.000 = 5000
+	- > 5.000.000 = 7000
+ *) maksimal per Transaksi adalah 20.000.000,-
+ 
+ Biaya COD :
+	- Untuk Daerah Bekasi dan sekitarnya 15.000
+	- Untuk Daerah Jakarta Timur, Jakarta Selatan, Jakarta Pusat 20.000
+	- Untuk Daerah Jakarta Barat dan sekitarnya 25.000
+	- Untuk Daerah lain silahkan hubungi kami
+	
+ Biaya Administrasi Gestun :
+	- <= 1.000.000 = 4,8%
+	- > 1.000.000 = 4,2%
+	
+ *) Maksimal Transaksi adalah 10.000.000,-
+ 
+ Biaya tambahan jika rekening seller/pelanggan Gestun selain bank BCA dan Mandiri : 6500
+ 
+ Rekening Wiqico :
+ - 6240502281 a/n Rizki Amelia (BCA)
