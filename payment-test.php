@@ -30,6 +30,13 @@ $billing = array(
     'country_code' => 'IDN'
 );
 
+$customer_details = array(
+    'first_name' => "Andri",
+    'last_name' => "djarot",
+    'email' => "aand@ijust.com",
+    'billing_address' => $billing
+);
+
 $params = array(
     'payment_type' => 'vtweb',
     'vtweb' => array(
@@ -40,7 +47,7 @@ $params = array(
         'order_id' => 'wq-10215',
         'gross_amount' => 1175000,
     ),
-    'customer_details' => $billing,
+    'customer_details' => $customer_details,
   );
 
 try{
