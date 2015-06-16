@@ -2,6 +2,7 @@
     require_once ('Veritrans.php');
     require_once ('config/databases.php');
     Veritrans_Config::$isProduction = false;
+    Veritrans_Config::$serverKey = 'VT-server-vUp77KtAuLYjjB_obHT2oDQI';
     
     $resp = new Veritrans_Notification();
     $conn = new connect("wq_wiqico_master");
