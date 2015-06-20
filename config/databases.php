@@ -4,8 +4,13 @@
         protected $username = "root";
         protected $password = "b6152kuy";
         
+        function __construct() {
+            $this->serv = $server;
+            $this->user = $username;
+            $this->pass = $password;
+        }
         public function connect($db) {
-            $conn = new mysqli($this->server, $this->username, $this->password, $db);
+            $conn = new mysqli($this->serv, $this->user, $this->pass, $db);
             return $conn;
         }
     }
